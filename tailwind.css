@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary brand colors */
+  --color-crisp-50: oklch(97% 0.02 265);
+  --color-crisp-100: oklch(94% 0.04 265);
+  --color-crisp-200: oklch(89% 0.07 265);
+  --color-crisp-300: oklch(82% 0.11 265);
+  --color-crisp-400: oklch(72% 0.15 265);
+  --color-crisp-500: oklch(62% 0.19 265);
+  --color-crisp-600: oklch(53% 0.21 265);
+  --color-crisp-700: oklch(44% 0.19 265);
+  --color-crisp-800: oklch(35% 0.15 265);
+  --color-crisp-900: oklch(25% 0.09 265);
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 0.75rem;
+  --radius-pill: 9999px;
+
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-fade-in: fadeIn 250ms ease-out forwards;
+  --animate-slide-up: slideUp 300ms ease-out forwards;
+  --animate-slide-left: slideLeft 300ms ease-out forwards;
+  --animate-count-up: countUp 400ms ease-out forwards;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
