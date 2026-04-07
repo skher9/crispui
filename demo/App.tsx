@@ -69,6 +69,8 @@ import {
   InputDepthPage, SelectDepthPage, CardDepthPage, ModalDepthPage,
   TagInputPage, AnimatedListPage, AnimatedNumberPage,
   PresenceAvatarsPage, StreamingTextPage, NotificationPage,
+  PhoneInputPage, RichTextEditorPage, CodeEditorPage,
+  JsonViewerPage, VirtualListPage, FloatingActionButtonPage, MentionInputPage,
 } from './pages/DepthPages';
 
 // ─── Nav tree ────────────────────────────────────────────────────────────────
@@ -236,6 +238,18 @@ const NAV: NavGroup[] = [
       { id: 'notification', label: 'Notification' },
     ],
   },
+  {
+    label: 'New Components',
+    items: [
+      { id: 'phone-input', label: 'PhoneInput' },
+      { id: 'mention-input', label: 'MentionInput' },
+      { id: 'rich-text-editor', label: 'RichTextEditor' },
+      { id: 'code-editor', label: 'CodeEditor' },
+      { id: 'json-viewer', label: 'JsonViewer' },
+      { id: 'virtual-list', label: 'VirtualList' },
+      { id: 'fab', label: 'FloatingActionButton' },
+    ],
+  },
 ];
 
 // ─── Page resolver ────────────────────────────────────────────────────────────
@@ -331,6 +345,14 @@ function Page({ id, onNavigate }: { id: string; onNavigate: (id: string) => void
     case 'presence-avatars':   return <PresenceAvatarsPage />;
     case 'streaming-text':     return <StreamingTextPage />;
     case 'notification':       return <NotificationPage />;
+    // New Components
+    case 'phone-input':        return <PhoneInputPage />;
+    case 'mention-input':      return <MentionInputPage />;
+    case 'rich-text-editor':   return <RichTextEditorPage />;
+    case 'code-editor':        return <CodeEditorPage />;
+    case 'json-viewer':        return <JsonViewerPage />;
+    case 'virtual-list':       return <VirtualListPage />;
+    case 'fab':                return <FloatingActionButtonPage />;
     default:                   return <HomePage onNavigate={onNavigate} />;
   }
 }

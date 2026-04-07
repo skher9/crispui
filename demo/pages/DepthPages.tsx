@@ -14,8 +14,15 @@ import {
   StreamingText, StreamingMessage, StreamingCode,
   NotificationBell,
   Button,
+  PhoneInput,
+  RichTextEditor,
+  CodeEditor,
+  JsonViewer,
+  VirtualList,
+  FloatingActionButton,
+  MentionInput,
 } from '@crispui/react';
-import type { NotificationItem, PresenceUser } from '@crispui/react';
+import type { NotificationItem, PresenceUser, FabAction } from '@crispui/react';
 import { DocPage, DocSection } from '../components/DocPage';
 import { ExampleBlock } from '../components/ExampleBlock';
 
@@ -685,6 +692,313 @@ export function NotificationPage() {
                 type: 'info' as const,
               }])}>+ Add</Button>
             </div>
+          </div>
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── PhoneInput ────────────────────────────────────────────────────────────────
+
+export function PhoneInputPage() {
+  return (
+    <DocPage title="PhoneInput" description="Phone number input with 50+ country flag selector, dial code, searchable dropdown, and full keyboard support." importNames="PhoneInput">
+      <DocSection title="Basic">
+        <ExampleBlock code={`<PhoneInput label="Phone number" defaultCountry="US" />`} previewClassName="flex-col gap-3 pb-56">
+          <PhoneInput label="Phone number" defaultCountry="US" hint="Select your country and enter your number" />
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="Sizes">
+        <ExampleBlock code={`<PhoneInput size="sm" />\n<PhoneInput size="md" />\n<PhoneInput size="lg" />`} previewClassName="flex-col gap-3 pb-52">
+          <PhoneInput size="sm" defaultCountry="GB" label="Small" />
+          <PhoneInput size="md" defaultCountry="IN" label="Medium" />
+          <PhoneInput size="lg" defaultCountry="JP" label="Large" />
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="States">
+        <ExampleBlock code={`<PhoneInput error="Invalid phone number" />\n<PhoneInput disabled />`} previewClassName="flex-col gap-3">
+          <PhoneInput label="With error" error="Please enter a valid phone number" defaultCountry="US" />
+          <PhoneInput label="Disabled" disabled defaultCountry="DE" />
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── RichTextEditor ────────────────────────────────────────────────────────────
+
+export function RichTextEditorPage() {
+  const [html, setHtml] = useState('<p>Start <strong>writing</strong> here…</p>');
+  return (
+    <DocPage title="RichTextEditor" description="WYSIWYG editor with full toolbar: headings, lists, blockquote, code, links, alignment, undo/redo, and clear format. Zero dependencies." importNames="RichTextEditor">
+      <DocSection title="Full toolbar">
+        <ExampleBlock code={`<RichTextEditor value={html} onChange={setHtml} label="Content" />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <RichTextEditor value={html} onChange={setHtml} label="Content" hint="Supports bold, italic, headings, lists, links and more" />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="Minimal toolbar">
+        <ExampleBlock code={`<RichTextEditor toolbar={['bold', 'italic', 'underline', 'separator', 'link']} />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <RichTextEditor toolbar={['bold', 'italic', 'underline', 'strikethrough', 'separator', 'link', 'unlink', 'separator', 'undo', 'redo']} label="Comment" placeholder="Write a comment…" minHeight={100} />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── CodeEditor ────────────────────────────────────────────────────────────────
+
+const DEMO_CODE = `import { useState } from 'react';
+import { Button } from '@crispui/react';
+
+interface Props {
+  title: string;
+  count?: number;
+}
+
+export function Counter({ title, count = 0 }: Props) {
+  const [value, setValue] = useState(count);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <h2 className="text-xl font-bold">{title}</h2>
+      <p className="text-gray-400">Count: {value}</p>
+      <Button onClick={() => setValue(v => v + 1)}>
+        Increment
+      </Button>
+    </div>
+  );
+}`;
+
+export function CodeEditorPage() {
+  const [code, setCode] = useState(DEMO_CODE);
+  return (
+    <DocPage title="CodeEditor" description="Syntax-highlighted code editor with line numbers, tab handling, auto-indent, and zero external dependencies. Supports tsx, ts, js, css, html, json, bash." importNames="CodeEditor">
+      <DocSection title="TypeScript / TSX">
+        <ExampleBlock code={`<CodeEditor language="tsx" value={code} onChange={setCode} />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <CodeEditor language="tsx" value={code} onChange={setCode} label="Component" />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="JSON">
+        <ExampleBlock code={`<CodeEditor language="json" />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <CodeEditor language="json" value={`{\n  "name": "@crispui/react",\n  "version": "0.1.0",\n  "dependencies": {\n    "framer-motion": "^12.0.0",\n    "tailwindcss": "^4.0.0"\n  }\n}`} minLines={8} readOnly label="package.json" />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="CSS">
+        <ExampleBlock code={`<CodeEditor language="css" />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <CodeEditor language="css" value={`.button {\n  background: oklch(0.6 0.2 250);\n  color: white;\n  border-radius: 0.75rem;\n  padding: 0.5rem 1rem;\n  font-weight: 600;\n  transition: all 0.15s ease;\n}\n\n.button:hover {\n  background: oklch(0.65 0.2 250);\n  transform: translateY(-1px);\n}`} minLines={10} label="styles.css" />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── JsonViewer ────────────────────────────────────────────────────────────────
+
+const DEMO_JSON = {
+  user: {
+    id: 'usr_01HX',
+    name: 'Alice Chen',
+    email: 'alice@example.com',
+    role: 'staff_engineer',
+    verified: true,
+    score: 9.8,
+    tags: ['react', 'typescript', 'design-systems'],
+    address: {
+      city: 'San Francisco',
+      country: 'US',
+      zip: '94105',
+    },
+    preferences: {
+      theme: 'dark',
+      notifications: { email: true, push: false, sms: null },
+    },
+  },
+  meta: { version: 2, createdAt: '2024-01-15T10:30:00Z' },
+};
+
+export function JsonViewerPage() {
+  return (
+    <DocPage title="JsonViewer" description="Interactive collapsible JSON tree with syntax colors, copy to clipboard, type hints, and configurable expand depth." importNames="JsonViewer">
+      <DocSection title="Nested object">
+        <ExampleBlock code={`<JsonViewer data={user} expandDepth={2} />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <JsonViewer data={DEMO_JSON} expandDepth={2} rootName="response" />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="Array">
+        <ExampleBlock code={`<JsonViewer data={items} expandDepth={1} />`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <JsonViewer
+              data={[
+                { id: 1, name: 'Button', variants: ['solid', 'outline', 'ghost'], count: 12 },
+                { id: 2, name: 'Input', variants: ['outline', 'filled', 'flushed', 'glass'], count: 8 },
+                { id: 3, name: 'Card', variants: ['default', 'glass', 'gradient', 'glow'], count: 11 },
+              ]}
+              expandDepth={1}
+              rootName="components"
+            />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── VirtualList ───────────────────────────────────────────────────────────────
+
+export function VirtualListPage() {
+  const ITEMS = Array.from({ length: 10000 }, (_, i) => ({
+    id: i,
+    name: `Item #${i + 1}`,
+    email: `user${i}@example.com`,
+    status: i % 3 === 0 ? 'active' : i % 3 === 1 ? 'pending' : 'inactive',
+  }));
+
+  return (
+    <DocPage title="VirtualList" description="Virtualized list that renders only visible rows — handles 10,000+ items with no performance hit. Fixed row height, overscan, and end-reached callback." importNames="VirtualList">
+      <DocSection title="10,000 items — no lag">
+        <ExampleBlock code={`<VirtualList\n  items={tenThousandItems}\n  itemHeight={52}\n  height={360}\n  renderItem={(item, i) => <Row item={item} />}\n/>`} previewClassName="flex-col w-full">
+          <div className="w-full">
+            <VirtualList
+              items={ITEMS}
+              itemHeight={52}
+              height={360}
+              className="rounded-xl border border-gray-800 bg-gray-950"
+              itemClassName="border-b border-gray-800/60 last:border-0 px-4 w-full"
+              keyExtractor={item => (item as typeof ITEMS[0]).id}
+              renderItem={(item) => {
+                const i = item as typeof ITEMS[0];
+                const color = i.status === 'active' ? 'bg-emerald-500/15 text-emerald-400' : i.status === 'pending' ? 'bg-amber-500/15 text-amber-400' : 'bg-gray-700 text-gray-500';
+                return (
+                  <div className="flex items-center gap-3 w-full py-2">
+                    <div className="w-7 h-7 rounded-full bg-crisp-500/15 flex items-center justify-center text-xs font-semibold text-crisp-400 shrink-0">
+                      {String(i.id + 1).slice(-2)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-200 font-medium truncate">{i.name}</p>
+                      <p className="text-xs text-gray-600 truncate">{i.email}</p>
+                    </div>
+                    <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${color}`}>{i.status}</span>
+                  </div>
+                );
+              }}
+            />
+            <p className="text-xs text-gray-600 mt-2 text-center">Scroll to see 10,000 items rendered virtually</p>
+          </div>
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── FloatingActionButton ──────────────────────────────────────────────────────
+
+export function FloatingActionButtonPage() {
+  const [lastAction, setLastAction] = useState<string | null>(null);
+
+  const FAB_ACTIONS: FabAction[] = [
+    {
+      id: 'edit', label: 'Edit',
+      color: 'bg-violet-600 hover:bg-violet-500',
+      icon: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>,
+      onClick: () => setLastAction('Edit clicked'),
+    },
+    {
+      id: 'share', label: 'Share',
+      color: 'bg-sky-600 hover:bg-sky-500',
+      icon: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" /></svg>,
+      onClick: () => setLastAction('Share clicked'),
+    },
+    {
+      id: 'delete', label: 'Delete',
+      color: 'bg-rose-600 hover:bg-rose-500',
+      icon: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>,
+      onClick: () => setLastAction('Delete clicked'),
+    },
+  ];
+
+  return (
+    <DocPage title="FloatingActionButton" description="FAB with animated speed-dial menu, backdrop, icon transition, and configurable position/color. Can also be used as a standalone button." importNames="FloatingActionButton">
+      <DocSection title="Speed-dial FAB">
+        <ExampleBlock code={`<FloatingActionButton actions={actions} position="bottom-right" />`} previewClassName="relative h-64 bg-gray-900/30 rounded-xl">
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <p className="text-sm text-gray-600">{lastAction ?? 'Click the FAB in the corner'}</p>
+          </div>
+          <div className="absolute inset-0">
+            <FloatingActionButton actions={FAB_ACTIONS} position="bottom-right" label="" className="absolute" />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="Standalone">
+        <ExampleBlock code={`<FloatingActionButton onClick={handleClick} color="bg-emerald-600" />`} previewClassName="relative h-32">
+          <div className="relative h-full w-full">
+            <FloatingActionButton
+              onClick={() => setLastAction('Standalone FAB clicked')}
+              color="bg-emerald-600"
+              position="bottom-right"
+              className="absolute"
+              icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>}
+            />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+    </DocPage>
+  );
+}
+
+// ── MentionInput ──────────────────────────────────────────────────────────────
+
+const MENTION_USERS = [
+  { id: '1', name: 'Alice Chen',    username: 'alice',   role: 'Staff Engineer' },
+  { id: '2', name: 'Bob Martinez',  username: 'bob',     role: 'Designer' },
+  { id: '3', name: 'Carol White',   username: 'carol',   role: 'Product Manager' },
+  { id: '4', name: 'David Kim',     username: 'dkim',    role: 'Frontend Engineer' },
+  { id: '5', name: 'Emma Johnson',  username: 'emmaj',   role: 'Backend Engineer' },
+  { id: '6', name: 'Frank Liu',     username: 'fliu',    role: 'DevOps' },
+  { id: '7', name: 'Grace Park',    username: 'gracep',  role: 'QA Engineer' },
+  { id: '8', name: 'Henry Brown',   username: 'hbrown',  role: 'Data Scientist' },
+];
+
+export function MentionInputPage() {
+  const [value, setValue] = useState('');
+  return (
+    <DocPage title="MentionInput" description="Textarea with @mention autocomplete — fuzzy search by name or username, keyboard navigation, animated dropdown, and character count." importNames="MentionInput">
+      <DocSection title="Basic">
+        <ExampleBlock code={`<MentionInput users={users} placeholder="Type @ to mention…" />`} previewClassName="flex-col w-full pb-48">
+          <div className="w-full">
+            <MentionInput
+              users={MENTION_USERS}
+              value={value}
+              onChange={setValue}
+              label="Comment"
+              hint="Type @ to mention a teammate"
+              placeholder="Write a comment… use @ to mention someone"
+            />
+          </div>
+        </ExampleBlock>
+      </DocSection>
+      <DocSection title="With character limit">
+        <ExampleBlock code={`<MentionInput users={users} maxLength={280} />`} previewClassName="flex-col w-full pb-48">
+          <div className="w-full">
+            <MentionInput
+              users={MENTION_USERS}
+              maxLength={280}
+              rows={3}
+              label="Status update"
+              placeholder="What's on your mind? @ to mention…"
+            />
           </div>
         </ExampleBlock>
       </DocSection>
