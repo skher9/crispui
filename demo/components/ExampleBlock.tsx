@@ -68,7 +68,7 @@ export function ExampleBlock({
 
       {/* Content */}
       {tab === 'preview' ? (
-        <div className={`relative p-6 bg-gray-900/30 min-h-[80px] flex items-start justify-start flex-wrap gap-3 ${previewClassName ?? ''}`}>
+        <div className={`relative p-8 bg-gray-900/30 min-h-[100px] flex items-center justify-start flex-wrap gap-4 ${previewClassName ?? ''}`}>
           {children}
         </div>
       ) : (

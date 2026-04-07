@@ -15,7 +15,7 @@ export function DocPage({ title, description, importPath = '@crispui/react', imp
     : `import { ... } from '${importPath}';`;
 
   return (
-    <div className="max-w-4xl mx-auto px-8 py-10">
+    <div>
       {/* Title block */}
       <div className="mb-8 pb-6 border-b border-white/[0.07]">
         <h1 className="text-3xl font-bold text-white mb-3 tracking-tight">{title}</h1>

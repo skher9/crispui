@@ -552,7 +552,7 @@ export function HoverCardPage() {
     </div>
     <p className="mt-2 text-xs text-gray-400">50+ components · Dark mode · TypeScript</p>
   </HoverCardContent>
-</HoverCard>`}>
+</HoverCard>`} previewClassName="pb-40">
           <HoverCard>
             <HoverCardTrigger>
               <Button variant="outline">@crispui</Button>
@@ -637,7 +637,7 @@ export function AutocompletePage() {
     { value: 'node', label: 'Node.js', group: 'Backend' },
   ]}
   onChange={(value, option) => console.log(value, option)}
-/>`} previewClassName="flex-col items-stretch w-full max-w-xs">
+/>`} previewClassName="flex-col items-stretch w-full max-w-xs pb-52">
           <Autocomplete
             label="Framework"
             placeholder="Search frameworks…"
@@ -673,7 +673,7 @@ export function DropdownMenuPage() {
   <DropdownMenuItem>Settings</DropdownMenuItem>
   <DropdownMenuSeparator />
   <DropdownMenuItem destructive>Sign out</DropdownMenuItem>
-</SimpleDropdownMenu>`}>
+</SimpleDropdownMenu>`} previewClassName="pb-44">
           <SimpleDropdownMenu trigger={<Button variant="outline">Options ▾</Button>}>
             <DropdownMenuLabel>Account</DropdownMenuLabel>
             <DropdownMenuItem icon={<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>} shortcut="⌘P">Profile</DropdownMenuItem>
@@ -690,7 +690,7 @@ export function DropdownMenuPage() {
   <DropdownMenuCheckboxItem checked={notifications} onCheckedChange={setNotifications}>
     Notifications
   </DropdownMenuCheckboxItem>
-</SimpleDropdownMenu>`}>
+</SimpleDropdownMenu>`} previewClassName="pb-36">
           <SimpleDropdownMenu trigger={<Button variant="outline">View settings ▾</Button>}>
             <DropdownMenuLabel>Display</DropdownMenuLabel>
             <DropdownMenuItem>Show toolbar</DropdownMenuItem>

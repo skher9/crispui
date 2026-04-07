@@ -106,13 +106,13 @@ export function SelectDepthPage() {
   return (
     <DocPage title="Select — All Features" description="Fully custom dark select with multi-select, search, creatable, grouped options, avatars, badges, and keyboard navigation." importNames="Select">
       <DocSection title="Basic + search + clear">
-        <ExampleBlock code={`<Select options={countries} searchable clearable placeholder="Select country" />`} previewClassName="flex-col gap-3">
+        <ExampleBlock code={`<Select options={countries} searchable clearable placeholder="Select country" />`} previewClassName="flex-col gap-3 pb-52">
           <Select options={COUNTRIES} searchable clearable placeholder="Select country…" label="Country" />
         </ExampleBlock>
       </DocSection>
 
       <DocSection title="Multi-select">
-        <ExampleBlock code={`<Select options={options} multiple clearable searchable />`} previewClassName="flex-col gap-3">
+        <ExampleBlock code={`<Select options={options} multiple clearable searchable />`} previewClassName="flex-col gap-3 pb-52">
           <Select
             options={COUNTRIES}
             multiple clearable searchable
@@ -126,19 +126,19 @@ export function SelectDepthPage() {
       </DocSection>
 
       <DocSection title="Grouped options">
-        <ExampleBlock code={`<Select options={groupedRoles} searchable />`} previewClassName="flex-col gap-3">
+        <ExampleBlock code={`<Select options={groupedRoles} searchable />`} previewClassName="flex-col gap-3 pb-52">
           <Select options={ROLES} searchable label="Role" placeholder="Select role…" />
         </ExampleBlock>
       </DocSection>
 
       <DocSection title="With descriptions + badges">
-        <ExampleBlock code={`<Select options={optionsWithMeta} />`} previewClassName="flex-col gap-3">
+        <ExampleBlock code={`<Select options={optionsWithMeta} />`} previewClassName="flex-col gap-3 pb-52">
           <Select options={COUNTRIES} label="Country with metadata" placeholder="Choose…" />
         </ExampleBlock>
       </DocSection>
 
       <DocSection title="Creatable">
-        <ExampleBlock code={`<Select options={options} creatable searchable />`} previewClassName="flex-col gap-3">
+        <ExampleBlock code={`<Select options={options} creatable searchable />`} previewClassName="flex-col gap-3 pb-52">
           <Select
             options={[{ value: 'react', label: 'React' }, { value: 'vue', label: 'Vue' }, { value: 'svelte', label: 'Svelte' }]}
             creatable searchable multiple clearable
@@ -150,7 +150,7 @@ export function SelectDepthPage() {
       </DocSection>
 
       <DocSection title="Max selected">
-        <ExampleBlock code={`<Select multiple maxSelected={3} />`} previewClassName="flex-col gap-3">
+        <ExampleBlock code={`<Select multiple maxSelected={3} />`} previewClassName="flex-col gap-3 pb-52">
           <Select options={COUNTRIES} multiple maxSelected={3} label="Select up to 3 countries" placeholder="Max 3…" hint="You can select up to 3 options" />
         </ExampleBlock>
       </DocSection>
@@ -422,7 +422,7 @@ export function TagInputPage() {
         </ExampleBlock>
       </DocSection>
       <DocSection title="With suggestions">
-        <ExampleBlock code={`<TagInput suggestions={['react', 'vue', ...]} />`}>
+        <ExampleBlock code={`<TagInput suggestions={['react', 'vue', ...]} />`} previewClassName="pb-40">
           <TagInput suggestions={['react','vue','svelte','angular','solid','qwik','astro','next','remix','vite']} label="Tech stack" placeholder="Type or pick from suggestions" />
         </ExampleBlock>
       </DocSection>
@@ -665,7 +665,7 @@ export function NotificationPage() {
   return (
     <DocPage title="NotificationBell" description="Bell icon with unread count badge, dropdown panel, mark as read, and clear actions." importNames="NotificationBell">
       <DocSection title="Notification bell">
-        <ExampleBlock code={`<NotificationBell notifications={notifs} onMarkRead={id => ...} onClear={id => ...} />`}>
+        <ExampleBlock code={`<NotificationBell notifications={notifs} onMarkRead={id => ...} onClear={id => ...} />`} previewClassName="pb-80">
           <div className="flex items-center gap-4 p-4 rounded-xl bg-gray-900 border border-gray-800">
             <p className="text-sm text-gray-400">Click the bell →</p>
             <NotificationBell

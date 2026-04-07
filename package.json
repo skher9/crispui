@@ -26,8 +26,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npx @tailwindcss/cli -i ./src/styles/index.css -o ./dist/crisp.css --minify",
+    "build:site": "vite build --config vite.site.config.ts",
     "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "preview": "vite preview",
+    "preview:site": "vite preview --config vite.site.config.ts --outDir site",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {

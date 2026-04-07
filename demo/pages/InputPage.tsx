@@ -159,7 +159,7 @@ export function SelectPage() {
     { value: 'uk', label: 'United Kingdom' },
     { value: 'au', label: 'Australia' },
   ]}
-/>`} previewClassName="flex-col items-stretch">
+/>`} previewClassName="flex-col items-stretch pb-40">
           <div className="w-full max-w-xs">
             <Select label="Country" placeholder="Select a country…" options={[
               { value: 'us', label: 'United States' },
@@ -172,7 +172,7 @@ export function SelectPage() {
 
       <DocSection title="With error & hint">
         <ExampleBlock code={`<Select label="Role" placeholder="Pick a role…" error="This field is required" options={[...]} />
-<Select label="Department" options={[...]} hint="Affects your default workspace." />`} previewClassName="flex-col items-stretch gap-3">
+<Select label="Department" options={[...]} hint="Affects your default workspace." />`} previewClassName="flex-col items-stretch gap-3 pb-40">
           <div className="w-full max-w-xs space-y-3">
             <Select label="Role" placeholder="Pick a role…" error="This field is required" options={[{ value: 'eng', label: 'Engineer' }, { value: 'design', label: 'Designer' }]} />
             <Select label="Department" options={[{ value: 'eng', label: 'Engineering' }, { value: 'product', label: 'Product' }]} hint="Affects your default workspace." />
