@@ -48,6 +48,9 @@ import { StatCardPage, DataTablePage } from './pages/DataDisplayPage';
 // Pages — Productivity
 import { PomodoroPage, KanbanPage, HabitTrackerPage } from './pages/ProductivityPage';
 
+// Pages — Legal
+import { TermsPage, PrivacyPage } from './pages/LegalPages';
+
 // Pages — Phase 2 (Effects, Charts, DataGrid, Sections)
 import {
   BackgroundEffectsPage, ColorPickerPage, ChartPage, DataGridPage,
@@ -338,6 +341,8 @@ function Page({ id, onNavigate }: { id: string; onNavigate: (id: string) => void
     case 'json-viewer':        return <JsonViewerPage />;
     case 'virtual-list':       return <VirtualListPage />;
     case 'fab':                return <FloatingActionButtonPage />;
+    case 'terms':              return <TermsPage />;
+    case 'privacy':            return <PrivacyPage />;
     default:                   return <HomePage onNavigate={onNavigate} />;
   }
 }
@@ -431,7 +436,7 @@ function Sidebar({
       </nav>
 
       {/* Footer */}
-      <div className="px-5 py-4 border-t border-gray-800 shrink-0">
+      <div className="px-5 py-4 border-t border-gray-800 shrink-0 space-y-3">
         <a
           href="https://github.com"
           target="_blank"
@@ -443,6 +448,23 @@ function Sidebar({
           </svg>
           GitHub
         </a>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => onSelect('terms')}
+            className={`text-xs transition-colors ${current === 'terms' ? 'text-crisp-400' : 'text-gray-600 hover:text-gray-400'}`}
+          >
+            Terms
+          </button>
+          <span className="text-gray-800 text-xs">·</span>
+          <button
+            onClick={() => onSelect('privacy')}
+            className={`text-xs transition-colors ${current === 'privacy' ? 'text-crisp-400' : 'text-gray-600 hover:text-gray-400'}`}
+          >
+            Privacy
+          </button>
+          <span className="text-gray-800 text-xs">·</span>
+          <span className="text-xs text-gray-700">© 2025 crispui</span>
+        </div>
       </div>
     </aside>
   );
